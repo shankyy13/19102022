@@ -1,0 +1,31 @@
+
+<h1 style="font-size:38px;text-align:center;width:100%;font-family:Times New Roman, Times, serif;margin-top:2%;" mat-dialog-title>Details</h1>
+
+<div mat-dialog-content>
+
+<table  class="mat-elevation-z8">
+  <tbody>
+    <tr>
+        
+        <td *ngIf="data.user.companyName; else elseCompany" ><b>CompanyName : </b>  {{data.user.companyName}}<br></td>
+      </tr>
+      <tr>
+      <td *ngIf="data.user.applicationName; else elseApplication"><b> ApplicationName :</b> {{data.user.applicationName}}<br></td>
+    </tr>
+    <tr>
+      <td *ngIf="data.user.deviceName; else elseDevice"><b> Browser version :</b> {{data.user.deviceName}}<br></td>
+    </tr>
+      
+     
+ <tr>
+    <td><ng-template #elseCompany><b>CompanyName :</b> NA <br> </ng-template></td>
+    
+      <td><ng-template #elseApplication><b> ApplicationName :</b> NA <br> </ng-template></td>
+     
+      <td><ng-template #elseDevice><b> Browser version :</b>   NA <br></ng-template></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+

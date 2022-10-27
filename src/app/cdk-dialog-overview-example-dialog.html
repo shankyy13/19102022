@@ -1,0 +1,60 @@
+
+<!-- Add icon library -->
+<ngx-spinner  size="medium" type="timer"></ngx-spinner>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<br>
+<div mat-dialog-title>
+  <h1 style="font-size:37px;text-align:center;width:100%;font-family:Times New Roman, Times, serif;">Vox Rep Submission</h1>
+</div>
+<br>
+<div mat-dialog-content>
+<form  [formGroup]="regform" >
+<div *ngIf="isCancelClicked">
+<a (click)="onCancel(false)" class="close" ></a>
+<img class='ss' src="{{data.img}}" />
+</div>
+<br>
+<img (click)="record($event)" style="cursor:pointer;width:10%;height:8%;display: block;
+margin-left: auto;
+margin-right: auto;" src="https://play-lh.googleusercontent.com/C3oTVtjw9Xl3icZ9XAT1-U8QBEEXX9rXZbC26-DL9lwstzC3RIKwLeQMT57CZbS4QA"/>
+
+<br>
+<textarea  rows="5" cols="50" formControlName="address" (keydown)="onFocusOut($event)" placeholder='Enter Your Issues...' required>
+  {{content}}</textarea>
+ 
+<div class = "overlay voice show" (click)="hideImage()" >
+<img class="imgg" width="350" src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/bddf8a11582713.560fa0db0dee5.gif" />
+
+</div>
+
+
+<br>
+<section class="example-section">
+<mat-slide-toggle
+  class="example-margin"
+  [color]="color"
+  formControlName="isChecked"><b>
+Add Wallet Address</b>
+</mat-slide-toggle>
+
+</section>
+
+<div *ngIf="this.regform.value.isChecked">
+
+<input  type="text" formControlName="wallet" placeholder="Enter Wallet Address" required/>
+</div>
+</form>
+</div>
+&nbsp;&nbsp;
+<div mat-dialog-actions>
+  <div class-="btnaction" style="position: -webkit-sticky;margin-left:32%">
+<button style=" background-color:rgb(13, 146, 235);color:white;" mat-button (click)="onSubmit()">Submit</button>
+<button style="background-color:rgb(13, 146, 235);color:white;" mat-button (click)='this.dialogRef.close()'>Close</button>
+  </div>
+</div>
+
+
+
+
+

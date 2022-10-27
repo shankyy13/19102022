@@ -1,0 +1,102 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+<meta charset="UTF-8">
+<ngx-spinner style="margin-top:10%;" size="medium" type="timer"></ngx-spinner>
+
+ <h1 *ngIf="!isfullView" style="margin-top:5%;font-size:38px;text-align:center;width:100%;font-family:Times New Roman, Times, serif;">Rep List</h1> 
+
+
+<div *ngIf="!isfullView" class="example-container mat-elevation-z8">
+<div class="example-table-container">
+
+
+  <table mat-table [dataSource]="userData" class="example-table" >
+    <!-- id Column -->
+    <ng-container matColumnDef="ID">
+    <th mat-header-cell *matHeaderCellDef>  </th>
+    <td (click)="details(user)" mat-cell *matCellDef="let user "> {{user.id}}
+     </td>
+  </ng-container>
+
+    <!-- comment Column -->
+    
+<ng-container matColumnDef="Comments">
+<th  style="font-size:38px;text-align:center;font-family:Times New Roman, Times, serif;" mat-header-cell *matHeaderCellDef> Rep List </th>
+<td (click)="details(user)" mat-cell *matCellDef="let user "> {{user.comments}} 
+</td>
+</ng-container>
+
+<ng-container matColumnDef="display">
+  <th   mat-header-cell *matHeaderCellDef> </th>
+  <td (click)="details(user)" mat-cell *matCellDef="let user "> <mat-icon>info</mat-icon>
+  </td>
+  </ng-container>
+
+
+    <!-- image Column -->
+    <ng-container matColumnDef="Image">
+    <th mat-header-cell *matHeaderCellDef >  </th>
+    
+    <td mat-cell *matCellDef="let user">
+      <div *ngIf="user.feedbackFiles && user.feedbackFiles.length; else elseBlock">
+      <div *ngFor="let userfeed of user.feedbackFiles" >
+      <img *ngIf="userfeed.imageUrl; else elseBlock" (click)="fullView(true,user.id)" class="a" src="{{userfeed.imageUrl}}" />
+      </div>
+      </div>
+      <ng-template #elseBlock> <img class="a" src="https://demofree.sirv.com/nope-not-here.jpg" /></ng-template>
+    </td>
+
+  </ng-container>
+
+  <ng-container matColumnDef="Review">
+  <th mat-header-cell *matHeaderCellDef>  </th>
+  <td mat-cell *matCellDef="let user "> 
+    <div *ngIf="(user.customerState=='Happy')">
+    <span style='font-size:40px;'>😄</span>
+  </div> 
+  <div *ngIf="(user.customerState=='Angry')">
+  <span style='font-size:40px;'>😡</span>
+</div>
+<div *ngIf="(user.customerState=='Neutral')">
+<span style='font-size:40px;'>😐</span>
+
+</div>
+  </td>
+  </ng-container>
+  
+  <ng-container matColumnDef="action">
+  <th mat-header-cell *matHeaderCellDef>  </th>
+  <td mat-cell *matCellDef="let user ">
+    <button style=" background-color:rgb(13, 146, 235); color:white" mat-button (click)="share()">notify</button>
+  </td>
+  </ng-container>
+  
+
+  <!-- <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr> -->
+  <tr style="cursor: pointer;"  mat-row *matRowDef="let row; columns: displayedColumns;">
+  </tr> 
+
+  </table>
+ 
+
+
+</div>
+
+  <router-outlet></router-outlet>
+</div>
+
+<div *ngIf="isfullView">
+<div *ngFor="let user of userData">
+  <div *ngIf="Id==user.id">
+<div *ngFor="let userfeed of user.feedbackFiles" >
+ <div class="blurimg"></div>
+<img class="fullimg" src="{{userfeed.imageUrl}}" />
+<a (click)="fullView(false,user.id)" class="close" ></a>
+</div>
+  </div>
+</div>
+</div>
+<!-- 
+<mat-paginator [length]="resultsLength" [pageSize]="30" aria-label="Select page of GitHub search results"></mat-paginator> -->
+
+
